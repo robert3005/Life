@@ -1,36 +1,39 @@
 package life;
 
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 import life.ICell.CellColor;
 
-public class LifeModel implements ILifeModel {
+public class LifeModel extends Observable implements Observer {
 
 	private IGrid grid;
-	private int rate;
 	private int turn;
+	private int rate;
 
 	public LifeModel(int size) {
 		grid = new ContinousGrid(size);
-		rate = 1;
 		turn = 0;
+		rate = 1;
 	}
 
-	@Override
+
 	public int getBoardSize() {
 		return grid.getSize();
 	}
 
-	@Override
+	
 	public void makeStep() {
-		IGrid newGrid = new ContinousGrid(grid.getSize());
-		for (int i = 0; i < grid.getSize(); ++i) {
-			for (int j = 0; j < grid.getSize(); ++j) {
+		int size = getBoardSize();
+		IGrid newGrid = new ContinousGrid(size);
+		for (int i = 0; i < size; ++i) {
+			for (int j = 0; j < size; ++j) {
 				int[] neighbourCounts = getColorCount(i, j);
-				CellColor cellColour = grid.getCell(i, j).getColor();
-				if (cellColour != CellColor.Gray) {
+				ICell currentCell = getCell(i, j);
+				if (currentCell.isAlive()) {
 					if (neighbourCounts[2] == 6 || neighbourCounts[2] == 5) {
-						newGrid.setCell(i, j, grid.getCell(i, j).getColor());
+						newGrid.setCell(i, j, currentCell.getColor());
 					}
 				} else {
 					if (neighbourCounts[2] == 5) {
@@ -43,6 +46,8 @@ public class LifeModel implements ILifeModel {
 		}
 		grid = newGrid;
 		++turn;
+		setChanged();
+		notifyObservers();
 	}
 
 	private int[] getColorCount(int x, int y) {
@@ -65,34 +70,48 @@ public class LifeModel implements ILifeModel {
 		return colorCounts;
 	}
 
-	@Override
-	public int getRate() {
-		return rate;
-	}
-
-	@Override
-	public void setRate(int rate) {
-		this.rate = rate;
-	}
-
-	@Override
+	
 	public int getTurn() {
 		return turn;
 	}
 
-	@Override
-	public void setTurn(int turn) {
-		this.turn = turn;
+	public void setRate(int rate) {
+		this.rate = rate;
+		setChanged();
+		notifyObservers();
 	}
-
-	@Override
+	
+	public int getRate() {
+		return rate;
+	}
+	
 	public void setCell(int x, int y, CellColor newColor) {
 		grid.setCell(x, y, newColor);
 	}
 
-	@Override
-	public CellColor getCellColor(int x, int y) {
-		return grid.getCell(x, y).getColor();
+	
+	public ICell getCell(int x, int y) {
+		return grid.getCell(x, y);
 	}
 
+	
+	public void clear() {
+		int size = getBoardSize();
+		for (int i = 0; i < size; ++i) {
+			for (int j = 0; j < size; ++j) {
+				setCell(i, j, CellColor.Gray);
+			}
+		}
+		turn = 0;
+		setChanged();
+		notifyObservers();
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		rate = (int)arg;
+		setChanged();
+		notifyObservers();
+	}
 }

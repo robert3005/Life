@@ -8,4 +8,6 @@ public interface ICell {
 	
 	public CellColor getColor();
 	
+	public boolean isAlive();
+	
 }
