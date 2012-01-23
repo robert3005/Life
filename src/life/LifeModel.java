@@ -9,9 +9,11 @@ public class LifeModel implements ILifeModel {
 	private IGrid grid;
 	private int rate;
 	private int turn;
-	
+
 	public LifeModel(int size) {
 		grid = new ContinousGrid(size);
+		rate = 1;
+		turn = 0;
 	}
 
 	@Override
@@ -40,6 +42,7 @@ public class LifeModel implements ILifeModel {
 			}
 		}
 		grid = newGrid;
+		++turn;
 	}
 
 	private int[] getColorCount(int x, int y) {
@@ -66,7 +69,7 @@ public class LifeModel implements ILifeModel {
 	public int getRate() {
 		return rate;
 	}
-	
+
 	@Override
 	public void setRate(int rate) {
 		this.rate = rate;
@@ -81,7 +84,7 @@ public class LifeModel implements ILifeModel {
 	public void setTurn(int turn) {
 		this.turn = turn;
 	}
-	
+
 	@Override
 	public void setCell(int x, int y, CellColor newColor) {
 		grid.setCell(x, y, newColor);

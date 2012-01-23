@@ -12,9 +12,10 @@ public class ContinousGrid implements IGrid {
 	public ContinousGrid(int size) {
 		gridSize = size;
 		grid = new LifeCell[gridSize][gridSize];
-		ICell cell = new LifeCell();
-		for(ICell[] gridRow : grid) {
-			Arrays.fill(gridRow, cell);
+		for(int y = 0; y < gridSize; ++y) {
+			for(int x = 0; x < gridSize; ++x) {
+				grid[x][y] = new LifeCell();
+			}
 		}
 	}
 	
