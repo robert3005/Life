@@ -62,7 +62,7 @@ public class Life implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		runTimer.setDelay((int) (delayConstant / (int) arg));
+		runTimer.setDelay((int) (delayConstant / ((Integer) arg)));
 	}
 
 }

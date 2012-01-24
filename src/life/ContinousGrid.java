@@ -23,7 +23,10 @@ public class ContinousGrid<T> {
 			for (int x = 0; x < gridSize; ++x) {
 				try {
 					grid[x][y] = (T) coreType.newInstance();
-				} catch (InstantiationException | IllegalAccessException e) {
+				} catch (InstantiationException  e) {
+					// should never happen
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
 					// should never happen
 					e.printStackTrace();
 				}

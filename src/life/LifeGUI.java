@@ -41,26 +41,12 @@ public class LifeGUI implements Observer {
 	public LifeGUI(int size) {
 		boardSize = size;
 		cellGrid = new CellButton[boardSize][boardSize];
-
-		try {
-			// Set System L&F
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle exception
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exception
-		}
-		JFrame.setDefaultLookAndFeelDecorated(true);
 	}
 
 	public void draw() {
 		final JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.setSize(1280, 800);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setSize(800, 800);
 
 		final Box buttonBox = new Box(BoxLayout.X_AXIS);
 
