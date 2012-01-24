@@ -23,6 +23,7 @@ import life.LifeCell.CellColour;
 
 /**
  * Creates UI of Life and registers listeners for objects
+ * Observes model and on change is informed about the need to redraw the view
  */
 public class LifeGUI implements Observer {
 
