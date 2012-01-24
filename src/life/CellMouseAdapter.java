@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
-import life.LifeCell.CellColor;
+import life.LifeCell.CellColour;
 
 /**
  * Captures button clicks for cells
@@ -27,10 +27,13 @@ public class CellMouseAdapter extends MouseAdapter {
 		if (sourceButton.isEnabled()) {
 			if (SwingUtilities.isLeftMouseButton(event)) {
 				sourceButton.setBackground(Color.RED);
-				model.setCell(x, y, CellColor.Red);
+				model.setCell(x, y, new LifeCell(CellColour.Red));
 			} else if (SwingUtilities.isRightMouseButton(event)) {
 				sourceButton.setBackground(Color.GREEN);
-				model.setCell(x, y, CellColor.Green);
+				model.setCell(x, y, new LifeCell(CellColour.Green));
+			} else if (SwingUtilities.isMiddleMouseButton(event)) {
+				sourceButton.setBackground(Color.GRAY);
+				model.setCell(x, y, new LifeCell(CellColour.Gray));				
 			}
 		}
 	}

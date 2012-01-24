@@ -5,24 +5,28 @@ package life;
  */
 public class LifeCell {
 
-	enum CellColor { Green, Red, Gray };
+	enum CellColour { Green, Red, Gray };
 	
-	private CellColor cellColor;
+	private CellColour cellColour;
+
+	public LifeCell(CellColour colour) {
+		cellColour = colour;
+	}
 
 	public LifeCell() {
-		cellColor = CellColor.Gray;
+		cellColour = CellColour.Gray;
 	}
 
-	public void setColor(CellColor newColor) {
-		cellColor = newColor;
+	public void setColor(CellColour newColor) {
+		cellColour = newColor;
 	}
 
-	public CellColor getColor() {
-		return cellColor;
+	public CellColour getColor() {
+		return cellColour;
 	}
 
 	public boolean isAlive() {
-		return cellColor != CellColor.Gray;
+		return cellColour != CellColour.Gray;
 	}
 
 }

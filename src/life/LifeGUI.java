@@ -21,7 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeListener;
 
-import life.LifeCell.CellColor;
+import life.LifeCell.CellColour;
 
 /**
  * Creates UI of Life and registers listeners for objects
@@ -94,7 +94,7 @@ public class LifeGUI implements Observer {
 		frame.setVisible(true);
 	}
 
-	private Color translateCellColor(CellColor modelColor) {
+	private Color translateCellColor(CellColour modelColor) {
 		switch (modelColor) {
 		case Gray:
 			return Color.GRAY;
