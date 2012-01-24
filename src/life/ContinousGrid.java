@@ -5,6 +5,9 @@ import java.util.Collection;
 
 import life.LifeCell.CellColor;
 
+/**
+ * Grid implementation that wraps around
+ */
 public class ContinousGrid {
 
 	private LifeCell[][] grid;

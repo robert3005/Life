@@ -22,11 +22,10 @@ public class ButtonClickListener implements ActionListener {
 	}
 
 	public void actionPerformed(final ActionEvent event) {
-
-		// the button pressed
-		final JButton sent = (JButton) event.getSource();
-		// the button's label
-		final String label = sent.getText();
+		
+		// Get the source button
+		JButton sent = (JButton) event.getSource();
+		String label = sent.getText();
 
 		if (label.equals("Clear")) {
 			model.clear();

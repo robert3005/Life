@@ -23,6 +23,9 @@ import javax.swing.event.ChangeListener;
 
 import life.LifeCell.CellColor;
 
+/**
+ * Creates UI of Life and registers listeners for objects
+ */
 public class LifeGUI implements Observer {
 
 	private final JLabel turn = new JLabel("0", SwingConstants.CENTER);

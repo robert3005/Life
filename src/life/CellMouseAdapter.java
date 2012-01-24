@@ -8,6 +8,9 @@ import javax.swing.SwingUtilities;
 
 import life.LifeCell.CellColor;
 
+/**
+ * Captures button clicks for cells
+ */
 public class CellMouseAdapter extends MouseAdapter {
 
 	private LifeModel model;

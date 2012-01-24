@@ -1,5 +1,8 @@
 package life;
 
+/**
+ * Class representing cell in the model
+ */
 public class LifeCell {
 
 	enum CellColor { Green, Red, Gray };

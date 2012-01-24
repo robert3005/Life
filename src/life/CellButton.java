@@ -3,7 +3,7 @@ package life;
 import javax.swing.JButton;
 
 /**
- * Class representing life cell
+ * Class representing life cell in the UI
  */
 public class CellButton extends JButton {
 

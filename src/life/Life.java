@@ -5,6 +5,10 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
+/**
+ * Initialises the game and creates and registers listeners for the UI
+ * Observes slider listener and adjusts timer delay accordingly
+ */
 public class Life implements Observer {
 
 	private final Timer runTimer;
