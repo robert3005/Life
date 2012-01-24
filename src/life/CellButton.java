@@ -2,6 +2,9 @@ package life;
 
 import javax.swing.JButton;
 
+/**
+ * Class representing life cell
+ */
 public class CellButton extends JButton {
 
 	private static final long serialVersionUID = -5754428060608107926L;

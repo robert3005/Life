@@ -2,20 +2,17 @@ package life;
 
 import java.util.Collection;
 import java.util.Observable;
-import java.util.Observer;
 
-import life.ICell.CellColor;
+import life.LifeCell.CellColor;
 
-public class LifeModel extends Observable implements Observer {
+public class LifeModel extends Observable {
 
-	private IGrid grid;
+	private ContinousGrid grid;
 	private int turn;
-	private int rate;
 
 	public LifeModel(int size) {
 		grid = new ContinousGrid(size);
 		turn = 0;
-		rate = 1;
 	}
 
 
@@ -23,14 +20,16 @@ public class LifeModel extends Observable implements Observer {
 		return grid.getSize();
 	}
 
-	
+	/**
+	 * Applies life rules to the current state
+	 */
 	public void makeStep() {
 		int size = getBoardSize();
-		IGrid newGrid = new ContinousGrid(size);
+		ContinousGrid newGrid = new ContinousGrid(size);
 		for (int i = 0; i < size; ++i) {
 			for (int j = 0; j < size; ++j) {
-				int[] neighbourCounts = getColorCount(i, j);
-				ICell currentCell = getCell(i, j);
+				int[] neighbourCounts = getColourCount(i, j);
+				LifeCell currentCell = getCell(i, j);
 				if (currentCell.isAlive()) {
 					if (neighbourCounts[2] == 6 || neighbourCounts[2] == 5) {
 						newGrid.setCell(i, j, currentCell.getColor());
@@ -50,24 +49,30 @@ public class LifeModel extends Observable implements Observer {
 		notifyObservers();
 	}
 
-	private int[] getColorCount(int x, int y) {
-		Collection<ICell> neighbours = grid.getNeighbours(x, y);
-		// neighbour cell color counts { Green, Red, Gray };
-		int[] colorCounts = { 0, 0, 0 };
-		for (ICell neighbour : neighbours) {
+	/**
+	 * Returns number of neighbours having respective colours
+	 * @param x x-coordinate
+	 * @param y y-coordinate
+	 * @return
+	 */
+	private int[] getColourCount(int x, int y) {
+		Collection<LifeCell> neighbours = grid.getNeighbours(x, y);
+		// neighbour cell colour counts { Green, Red, Gray };
+		int[] colourCounts = { 0, 0, 0 };
+		for (LifeCell neighbour : neighbours) {
 			switch (neighbour.getColor()) {
 			case Green:
-				++colorCounts[0];
+				++colourCounts[0];
 				break;
 			case Red:
-				++colorCounts[1];
+				++colourCounts[1];
 				break;
 			case Gray:
-				++colorCounts[2];
+				++colourCounts[2];
 				break;
 			}
 		}
-		return colorCounts;
+		return colourCounts;
 	}
 
 	
@@ -75,22 +80,12 @@ public class LifeModel extends Observable implements Observer {
 		return turn;
 	}
 
-	public void setRate(int rate) {
-		this.rate = rate;
-		setChanged();
-		notifyObservers();
-	}
-	
-	public int getRate() {
-		return rate;
-	}
-	
 	public void setCell(int x, int y, CellColor newColor) {
 		grid.setCell(x, y, newColor);
 	}
 
 	
-	public ICell getCell(int x, int y) {
+	public LifeCell getCell(int x, int y) {
 		return grid.getCell(x, y);
 	}
 
@@ -107,11 +102,4 @@ public class LifeModel extends Observable implements Observer {
 		notifyObservers();
 	}
 
-
-	@Override
-	public void update(Observable o, Object arg) {
-		rate = (int)arg;
-		setChanged();
-		notifyObservers();
-	}
 }

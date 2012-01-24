@@ -6,6 +6,9 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Listener which monitors the slider value and notifies controler on change
+ */
 public class ChangeValue extends Observable implements ChangeListener {
 
 	public void stateChanged(final ChangeEvent expn) {

@@ -21,7 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeListener;
 
-import life.ICell.CellColor;
+import life.LifeCell.CellColor;
 
 public class LifeGUI implements Observer {
 
@@ -57,7 +57,7 @@ public class LifeGUI implements Observer {
 	public void draw() {
 		final JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.setSize(300, 300);
+		frame.setSize(1280, 800);
 
 		final Box buttonBox = new Box(BoxLayout.X_AXIS);
 

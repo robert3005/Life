@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
+/**
+ * Listener which is responsible for handling 4 action buttons
+ */
 public class ButtonClickListener implements ActionListener {
 
 	private LifeModel model;

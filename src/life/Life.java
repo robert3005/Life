@@ -11,21 +11,26 @@ public class Life implements Observer {
 	private static final int delayConstant = 2000;
 
 	public Life(LifeModel model, LifeGUI gui) {
-		model.addObserver(this);
 		model.addObserver(gui);
+		
 		ChangeValue changeListener = new ChangeValue();
-		changeListener.addObserver(model);
+		changeListener.addObserver(this);
+		
 		runTimer = new Timer(delayConstant, new RunTimer(model));
+		runTimer.setInitialDelay(0);
+		
 		ButtonClickListener buttonClick = new ButtonClickListener(model, gui,
 				runTimer);
+		
 		CellMouseAdapter cellClick = new CellMouseAdapter(model);
+		
 		gui.createClickableCells(cellClick);
 		gui.setButtonListeners(buttonClick);
 		gui.setSliderListener(changeListener);
 	}
 
 	private static int readSize(String[] args) {
-		int size = 40;
+		int size = 30;
 		if (args.length > 0) {
 			try {
 				int userSize = Integer.parseInt(args[0]);
@@ -53,8 +58,7 @@ public class Life implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		LifeModel model = (LifeModel) o;
-		runTimer.setDelay((int) (delayConstant / model.getRate()));
+		runTimer.setDelay((int) (delayConstant / (int) arg));
 	}
 
 }
